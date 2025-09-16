@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="chat-container">
+    <div class="voice-status-indicator">
+        <div class="voice-wave"></div>
+        <span class="voice-status-text">Click the mic to start talking</span>
+    </div>
+
+    <div class="chat-messages" id="chatMessages">
+        <div class="message ai-message" id="initialGreeting">
+            <div class="message-content">
+                Hello! I'm here to listen and support you. How are you feeling today?
+            </div>
+            <div class="message-time">Just now</div>
+        </div>
+    </div>
+
+    <div class="chat-input-container">
+        <div class="chat-controls">
+            <form id="chatForm" class="chat-form">
+                <div class="voice-controls">
+                    <button type="button" class="btn btn-lg btn-primary voice-chat-button" id="micButton">
+                        <i data-feather="mic"></i>
+                        <span class="voice-label">Click to Talk</span>
+                        <div class="voice-waves">
+                            <span></span><span></span><span></span><span></span>
+                        </div>
+                    </button>
+                </div>
+            </form>
+            <button class="btn btn-danger emergency-button" data-bs-toggle="modal" data-bs-target="#emergencyModal">
+                <i data-feather="alert-circle"></i>
+                <span>Emergency</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Voice feedback audio elements -->
+<audio id="startRecordingSound" preload="auto">
+    <source src="{{ url_for('static', filename='audio/start-recording.mp3') }}" type="audio/mpeg">
+</audio>
+<audio id="stopRecordingSound" preload="auto">
+    <source src="{{ url_for('static', filename='audio/stop-recording.mp3') }}" type="audio/mpeg">
+</audio>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/voice_chat.js') }}"></script>
+{% endblock %}
