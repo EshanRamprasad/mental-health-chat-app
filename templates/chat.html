@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="modal fade" id="surveyModal" tabindex="-1" data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Quick Health Check</h5>
+            </div>
+            <div class="modal-body">
+                <form id="healthSurvey">
+                    <div class="mb-3">
+                        <label>How many hours of sleep did you get last night?</label>
+                        <input type="number" class="form-control" id="sleepHours" min="0" max="24" required>
+                    </div>
+                    <div class="mb-4">
+                        <h6>Over the last 2 weeks, how often have you been bothered by the following problems?</h6>
+                        <!-- PHQ4 Questions -->
+                        <div class="mb-3">
+                            <label>1. Feeling nervous, anxious, or on edge</label>
+                            <select class="form-select" id="phq4_1" required>
+                                <option value="0">Not at all</option>
+                                <option value="1">Several days</option>
+                                <option value="2">More than half the days</option>
+                                <option value="3">Nearly every day</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label>2. Not being able to stop or control worrying</label>
+                            <select class="form-select" id="phq4_2" required>
+                                <option value="0">Not at all</option>
+                                <option value="1">Several days</option>
+                                <option value="2">More than half the days</option>
+                                <option value="3">Nearly every day</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label>3. Feeling down, depressed, or hopeless</label>
+                            <select class="form-select" id="phq4_3" required>
+                                <option value="0">Not at all</option>
+                                <option value="1">Several days</option>
+                                <option value="2">More than half the days</option>
+                                <option value="3">Nearly every day</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label>4. Little interest or pleasure in doing things</label>
+                            <select class="form-select" id="phq4_4" required>
+                                <option value="0">Not at all</option>
+                                <option value="1">Several days</option>
+                                <option value="2">More than half the days</option>
+                                <option value="3">Nearly every day</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-info w-100">Start Chat</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="chat-container">
+    <div class="chat-messages" id="chatMessages">
+        <div class="message ai-message">
+            <div class="message-content">
+                Hello! I'm here to listen and support you. How are you feeling today?
+            </div>
+            <div class="message-time">Just now</div>
+        </div>
+    </div>
+    
+    <div class="chat-input-container">
+        <div class="chat-controls">
+            <form id="chatForm" class="chat-form">
+                <input type="text" id="messageInput" class="form-control chat-input" placeholder="Type your message..." autocomplete="off">
+                <button type="submit" class="btn btn-info send-button">
+                    <i data-feather="send"></i>
+                </button>
+            </form>
+            <button class="btn btn-danger emergency-button" data-bs-toggle="modal" data-bs-target="#emergencyModal">
+                <i data-feather="alert-circle"></i>
+                <span>Emergency</span>
+            </button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+{% endblock %}
