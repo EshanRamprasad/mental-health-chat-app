@@ -1,0 +1,238 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="container position-relative">
+        <!-- BeStill Logo Section -->
+        <div class="row justify-content-center mb-5 pt-4">
+            <div class="col-md-8 text-center">
+                <div class="hero-logo-container">
+                    <img src="{{ url_for('static', filename='assets/Be Still-03 (2).png') }}" alt="BeStill Logo" class="img-fluid">
+                </div>
+                <p class="lead text-white mt-4">Simple, reliable, private support for mental health, available anytime.</p>
+            </div>
+        </div>
+
+        <div class="row equal-height-row">
+            <!-- Service Cards Section (Left Side) -->
+            <div class="col-md-6">
+                <div class="row g-4">
+                    <!-- Text Now Card -->
+                    <div class="col-md-6">
+                        <div class="card h-100 border-0 shadow-lg service-card">
+                            <div class="card-body d-flex flex-column">
+                                <h3 class="card-title text-info h4">Text Now</h3>
+                                <p class="card-text flex-grow-1">A chatbot that will give advice for your mental health problems while allowing you to be anonymous and providing a non-judgemental enviornment through text.</p>
+                                <a href="/chat" class="btn btn-outline-info mt-auto">Start Texting</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Talk Now Card -->
+                    <div class="col-md-6">
+                        <div class="card h-100 border-0 shadow-lg service-card">
+                            <div class="card-body d-flex flex-column">
+                                <h3 class="card-title text-primary h4">Talk Now</h3>
+                                <p class="card-text flex-grow-1">A chatbot that will give advice for your mental health problems while allowing you to be anonymous and providing a non-judgemental enviornment through voice.</p>
+                                <a href="/talk" class="btn btn-outline-primary mt-auto">Start Talking</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Podcasts Card -->
+                    <div class="col-md-6">
+                        <div class="card h-100 border-0 shadow-lg service-card">
+                            <div class="card-body d-flex flex-column">
+                                <h3 class="card-title text-success h4">Podcasts</h3>
+                                <p class="card-text flex-grow-1">Podcasts to educate users about various mental health problems and solutions.</p>
+                                <a href="/podcasts" class="btn btn-outline-success mt-auto">Listen Now</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Guided Meditations Card -->
+                    <div class="col-md-6">
+                        <div class="card h-100 border-0 shadow-lg service-card">
+                            <div class="card-body d-flex flex-column">
+                                <h3 class="card-title text-purple h4 text-truncate">Guided Meditations</h3>
+                                <p class="card-text flex-grow-1">Take a moment to relax with our guided meditation sessions.</p>
+                                <a href="/meditations" class="btn btn-outline-purple mt-auto">Start Meditating</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content (Right Side) -->
+            <div class="col-md-6 text-center text-md-start ps-md-5 d-flex">
+                <div class="cta-container w-100">
+                    <h2 class="display-4 text-white mb-4">Welcome</h2>
+                    <p class="lead text-white mb-5">This is a safe space for teens who prefer to express their thoughts and concerns anonymously. Here, you can share any question or statement without fear of judgment. While this platform is rooted in science-based information, it is not professionally licensed. If you're facing serious concerns, we encourage you to seek guidance from a qualified healthcare professional. Feel free to explore, and remember, you're not alone—there are always people willing to listen!</p>
+                    <div class="d-flex justify-content-center justify-content-md-start mt-auto">
+                        <button class="btn btn-danger btn-lg px-4 py-3" data-bs-toggle="modal" data-bs-target="#emergencyModal">
+                            <i data-feather="alert-circle" class="me-2"></i>
+                            Emergency Help
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.hero-section {
+    position: relative;
+    min-height: 100vh;
+    background-image: url("{{ url_for('static', filename='assets/laura-chouette-lYFWRIwOj9c-unsplash.jpg') }}");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 2rem 0;
+    margin-top: -1rem;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(33, 37, 41, 0.95), rgba(33, 37, 41, 0.7));
+    backdrop-filter: blur(3px);
+}
+
+.hero-logo-container {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 2rem;
+    border-radius: 15px;
+    display: inline-block;
+    margin: 0 auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.hero-logo-container img {
+    max-height: 80px;
+    width: auto;
+}
+
+.equal-height-row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.equal-height-row > [class*='col-'] {
+    display: flex;
+    flex-direction: column;
+}
+
+.service-card {
+    background: rgba(33, 37, 41, 0.85);
+    backdrop-filter: blur(10px);
+    border: none !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: #fff;
+    height: 100%;
+}
+
+.service-card .card-body {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    height: 100%;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+.service-card .card-title {
+    font-weight: 600;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+.service-card .card-text {
+    color: rgba(255, 255, 255, 0.85);
+    flex-grow: 1;
+    margin-bottom: 1rem;
+}
+
+.btn-outline-info, .btn-outline-primary, .btn-outline-success {
+    color: #fff;
+    border-width: 2px;
+}
+
+.btn-outline-info:hover, .btn-outline-primary:hover, .btn-outline-success:hover {
+    color: #000;
+    background-color: #fff;
+    border-color: #fff;
+}
+
+.text-purple {
+    color: #FCD34D;
+}
+
+.btn-outline-purple {
+    color: #fff;
+    border-color: #FCD34D;
+    border-width: 2px;
+}
+
+.btn-outline-purple:hover {
+    color: #000;
+    background-color: #FCD34D;
+    border-color: #FCD34D;
+}
+
+.cta-container {
+    background: rgba(33, 37, 41, 0.85);
+    padding: 2rem;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    height: calc(100% - 1.5rem); /* Adjust to match grid height */
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.75rem; /* Half of the grid gap */
+}
+
+.cta-container h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.cta-container .lead {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    flex-grow: 1;
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 4rem 0;
+    }
+
+    .hero-logo-container {
+        padding: 1.5rem;
+    }
+
+    .hero-logo-container img {
+        max-height: 60px;
+    }
+
+    .col-md-6 {
+        margin-bottom: 2rem;
+    }
+
+    .cta-container {
+        margin-top: 2rem;
+        text-align: center;
+        min-height: auto;
+        height: auto;
+    }
+}
+</style>
+
+{% endblock %}
