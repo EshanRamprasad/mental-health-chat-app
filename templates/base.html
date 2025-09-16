@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="BeStill - Your AI-powered mental health support companion. Get 24/7 emotional support and guidance in a safe, confidential environment.">
+    <meta name="keywords" content="mental health, AI chat, emotional support, therapy, counseling, mindfulness, mental wellness, online support">
+    <meta name="author" content="BeStill">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.url }}">
+    <meta property="og:title" content="BeStill - Mental Health Support">
+    <meta property="og:description" content="Get 24/7 AI-powered mental health support and guidance in a safe, confidential environment.">
+    <meta property="og:image" content="{{ url_for('static', filename='assets/Be Still-03 (3).png', _external=True) }}">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="BeStill - Mental Health Support">
+    <meta name="twitter:description" content="Get 24/7 AI-powered mental health support and guidance in a safe, confidential environment.">
+    <meta name="twitter:image" content="{{ url_for('static', filename='assets/Be Still-03 (3).png', _external=True) }}">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='assets/favicon.ico', v='1.0') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='assets/favicon.ico', v='1.0') }}">
+
+    <title>BeStill - Mental Health Support</title>
+
+    <!-- Bootstrap CSS with cache busting -->
+    <link href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css', v='1.0') }}" rel="stylesheet">
+
+    <style>
+        .logo-container {
+            padding: 0.5rem;
+            margin-right: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-container img {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+    <!-- Emergency Contact Modal -->
+    <div class="modal fade" id="emergencyModal" tabindex="-1" aria-labelledby="emergencyModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title" id="emergencyModalLabel">
+                        <i data-feather="alert-circle" class="me-2"></i>
+                        Emergency Support
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-grid gap-3">
+                        <div class="emergency-contact-item">
+                            <h5>Immediate Crisis Support</h5>
+                            <a href="tel:988" class="btn btn-danger w-100 mb-2">
+                                <i data-feather="phone" class="me-2"></i>
+                                Call 988 - Crisis Lifeline
+                            </a>
+                            <p class="small text-muted">Available 24/7 for mental health crises</p>
+                        </div>
+                        
+                        <div class="emergency-contact-item">
+                            <h5>Teen Crisis Line</h5>
+                            <a href="sms:741741" class="btn btn-info w-100 mb-2">
+                                <i data-feather="message-square" class="me-2"></i>
+                                Text HOME to 741741
+                            </a>
+                            <p class="small text-muted">Free 24/7 support from Crisis Text Line</p>
+                        </div>
+                        
+                        <div class="emergency-contact-item">
+                            <h5>Emergency Services</h5>
+                            <a href="tel:911" class="btn btn-danger w-100 mb-2">
+                                <i data-feather="alert-octagon" class="me-2"></i>
+                                Call 911
+                            </a>
+                            <p class="small text-muted">For immediate life-threatening emergencies</p>
+                        </div>
+                        
+                        <div class="emergency-resources mt-3">
+                            <h6>Additional Resources:</h6>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <a href="https://www.samhsa.gov/find-treatment" target="_blank" rel="noopener noreferrer">
+                                        Find Local Treatment Centers
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://988lifeline.org/chat/" target="_blank" rel="noopener noreferrer">
+                                        988 Lifeline Web Chat
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                <div class="logo-container">
+                    <img src="{{ url_for('static', filename='assets/Be Still-04.png') }}" alt="BeStill Logo">
+                </div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('chat') }}">Text Now</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('talk') }}">Talk Now</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('meditations') }}">Meditations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('podcasts') }}">Podcasts</a>
+                    </li>
+                </ul>
+                <div class="ms-auto">
+                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#emergencyModal">
+                        <i data-feather="alert-circle" class="me-1"></i>
+                        Emergency Help
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="container mt-3">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    
+    {% block content %}{% endblock %}
+    
+    <footer class="footer mt-auto py-3 bg-dark">
+        <div class="container text-center">
+            <span class="text-muted">© 2024 BeStill. For immediate crisis support, 
+                <a href="#" data-bs-toggle="modal" data-bs-target="#emergencyModal" class="text-danger">
+                    click here
+                </a> or call 988.
+            </span>
+        </div>
+    </footer>
+    
+    <!-- Scripts with cache busting -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize feather icons
+            feather.replace();
+        });
+    </script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>
