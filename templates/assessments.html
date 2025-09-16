@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">Mental Health Assessments</h1>
+    
+    <div class="row">
+        <!-- GAD-7 Assessment -->
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">GAD-7 Anxiety Assessment</h5>
+                    <p class="card-text">Assess your anxiety levels with this validated tool.</p>
+                    <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#gad7Modal">
+                        Start Assessment
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- PHQ-9 Assessment -->
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">PHQ-9 Depression Screening</h5>
+                    <p class="card-text">Complete this comprehensive depression screening.</p>
+                    <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#phq9Modal">
+                        Start Assessment
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sleep Assessment -->
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Sleep Quality Assessment</h5>
+                    <p class="card-text">Evaluate your sleep patterns and quality.</p>
+                    <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#sleepModal">
+                        Start Assessment
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- GAD-7 Modal -->
+    <div class="modal fade" id="gad7Modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">GAD-7 Anxiety Assessment</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="gad7Form">
+                        <p>Over the last 2 weeks, how often have you been bothered by the following problems?</p>
+                        <div class="mb-3" id="gad7Questions">
+                            <!-- Questions will be populated by JavaScript -->
+                        </div>
+                        <button type="submit" class="btn btn-info w-100">Start Chat Support</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PHQ-9 Modal -->
+    <div class="modal fade" id="phq9Modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">PHQ-9 Depression Screening</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="phq9Form">
+                        <p>Over the last 2 weeks, how often have you been bothered by the following problems?</p>
+                        <div class="mb-3" id="phq9Questions">
+                            <!-- Questions will be populated by JavaScript -->
+                        </div>
+                        <button type="submit" class="btn btn-info w-100">Start Chat Support</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sleep Assessment Modal -->
+    <div class="modal fade" id="sleepModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Sleep Quality Assessment</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="sleepForm">
+                        <div class="mb-3">
+                            <label class="form-label">How many hours do you typically sleep per night?</label>
+                            <input type="number" class="form-control" id="sleepHours" min="0" max="24" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">How long does it usually take you to fall asleep?</label>
+                            <select class="form-select" id="sleepLatency" required>
+                                <option value="1">Less than 15 minutes</option>
+                                <option value="2">15-30 minutes</option>
+                                <option value="3">30-60 minutes</option>
+                                <option value="4">More than 60 minutes</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">How often do you wake up during the night?</label>
+                            <select class="form-select" id="sleepDisruption" required>
+                                <option value="1">Never</option>
+                                <option value="2">Sometimes</option>
+                                <option value="3">Often</option>
+                                <option value="4">Very Often</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-info w-100">Start Chat Support</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/assessments.js') }}"></script>
+{% endblock %}
