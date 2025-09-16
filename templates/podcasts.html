@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="display-4 text-center mb-3">Mental Health Podcasts</h1>
+            <div class="text-center mb-5">
+                <div class="podcast-intro">
+                    <p class="lead text-info mb-3">
+                        Welcome to our Mental Health Support Series
+                    </p>
+                    <p class="podcast-description">
+                        This show is dedicated to supporting everyone who struggles with mental health challenges. We transform complex research papers into accessible podcast content using advanced AI technology.
+                    </p>
+                    <p class="podcast-description mb-4">
+                        Each episode includes references to the original research papers and additional resources used in its creation. Remember, you're never alone - help is always available.
+                    </p>
+                </div>
+            </div>
+
+            <div class="text-center mb-4">
+                <a href="https://open.spotify.com/show/6iWiD78RG7vMrX5mfePrtq" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="btn btn-success btn-lg">
+                    <i class="fas fa-spotify me-2"></i>
+                    Listen to Full Series on Spotify
+                </a>
+                <p class="text-muted mt-2">Access all episodes and features on Spotify</p>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="text-center mb-4 display-6">Featured Episode</h2>
+    <div class="featured-episode">
+        <div class="card border-0 shadow">
+            <div class="card-body p-4">
+                <div class="spotify-embed-container mb-3">
+                    <iframe id="spotifyPlayer"
+                            style="border-radius:12px" 
+                            src="https://open.spotify.com/embed/show/6iWiD78RG7vMrX5mfePrtq?utm_source=generator&theme=0" 
+                            width="100%" 
+                            height="232" 
+                            frameBorder="0" 
+                            allowfullscreen="" 
+                            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                            loading="lazy">
+                    </iframe>
+                </div>
+                <div class="waveform-container mt-3">
+                    <canvas id="waveformCanvas"></canvas>
+                </div>
+                <div class="spotify-fallback mt-3" style="display: none;">
+                    <p class="text-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Having trouble loading the podcast player?
+                        <a href="https://open.spotify.com/show/6iWiD78RG7vMrX5mfePrtq" 
+                           target="_blank" 
+                           rel="noopener noreferrer" 
+                           class="btn btn-outline-info btn-sm ms-2">
+                            Open in Spotify
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.spotify-embed-container {
+    position: relative;
+    width: 100%;
+}
+
+.spotify-embed-container iframe {
+    display: block;
+    width: 100%;
+    border: none;
+}
+
+.waveform-container {
+    height: 50px;
+    background: rgba(33, 37, 41, 0.5);
+    border-radius: 8px;
+    padding: 10px;
+}
+
+#waveformCanvas {
+    width: 100%;
+    height: 100%;
+}
+
+.spotify-fallback {
+    text-align: center;
+    padding: 1rem;
+    border-radius: 8px;
+    background-color: var(--bs-dark);
+}
+
+.featured-episode {
+    margin-bottom: 2rem;
+}
+
+.card {
+    transition: transform 0.2s;
+    border-radius: 16px;
+    background: linear-gradient(145deg, rgba(13, 110, 253, 0.15), rgba(33, 37, 41, 0.85)) !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(13, 110, 253, 0.1);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.podcast-intro {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    background: rgba(33, 37, 41, 0.85);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+}
+
+.podcast-description {
+    color: #fff;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+}
+</style>
+
+<script src="{{ url_for('static', filename='js/waveform.js') }}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const canvas = document.getElementById('waveformCanvas');
+    const visualizer = new WaveformVisualizer(canvas, {
+        bars: 50,
+        color: '#1DB954'
+    });
+
+    const spotifyPlayer = document.getElementById('spotifyPlayer');
+    let isPlaying = false;
+
+    window.addEventListener('message', (event) => {
+        if (event.data.type === 'playback_update') {
+            isPlaying = event.data.data.isPaused === false;
+            if (isPlaying) {
+                visualizer.start();
+            } else {
+                visualizer.stop();
+            }
+        }
+    });
+
+    const spotifyIframe = document.querySelector('.spotify-embed-container iframe');
+    const fallbackContent = document.querySelector('.spotify-fallback');
+
+    spotifyIframe.addEventListener('error', function() {
+        fallbackContent.style.display = 'block';
+    });
+
+    setTimeout(function() {
+        if (spotifyIframe.contentWindow === null) {
+            fallbackContent.style.display = 'block';
+        }
+    }, 5000);
+});
+</script>
+{% endblock %}
