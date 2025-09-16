@@ -1,0 +1,312 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="display-4 text-center mb-4">Guided Meditations</h1>
+            <p class="lead text-center mb-5">Take a moment to breathe, relax, and center yourself with our guided meditations.</p>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <!-- 30 Second Meditation -->
+        <div class="col-md-4">
+            <div class="card meditation-card h-100" data-meditation-type="quick-reset">
+                <div class="ambient-light"></div>
+                <div class="card-body">
+                    <h3 class="card-title">Quick Reset (30 Seconds)</h3>
+                    <p class="card-text">Perfect for an instant reset during busy moments. This ultra-short meditation helps you quickly center yourself.</p>
+                    <div class="visualization-container mb-3">
+                        <div class="voice-waves quick-reset-waves">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="audio-player-container mt-3">
+                        <audio class="meditation-audio w-100" controls>
+                            <source src="{{ url_for('static', filename='audio/30secmeditation.mp3') }}" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                    <div class="meditation-info mt-3">
+                        <span class="badge bg-info">30 Seconds</span>
+                        <span class="badge bg-secondary">Beginner Friendly</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 1 Minute Meditation -->
+        <div class="col-md-4">
+            <div class="card meditation-card h-100" data-meditation-type="quick-calm">
+                <div class="ambient-light"></div>
+                <div class="card-body">
+                    <h3 class="card-title">Quick Calm (1 Minute)</h3>
+                    <p class="card-text">Perfect for a quick stress relief break. This short meditation helps you reset and refocus.</p>
+                    <div class="visualization-container mb-3">
+                        <div class="voice-waves quick-calm-waves">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="audio-player-container mt-3">
+                        <audio class="meditation-audio w-100" controls>
+                            <source src="{{ url_for('static', filename='audio/1minute.mp3') }}" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                    <div class="meditation-info mt-3">
+                        <span class="badge bg-info">1 Minute</span>
+                        <span class="badge bg-secondary">Beginner Friendly</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5 Minute Meditation -->
+        <div class="col-md-4">
+            <div class="card meditation-card h-100" data-meditation-type="deep-relaxation">
+                <div class="ambient-light"></div>
+                <div class="card-body">
+                    <h3 class="card-title">Deep Relaxation (5 Minutes)</h3>
+                    <p class="card-text">A longer session for deeper relaxation and mindfulness. Perfect for reducing anxiety and improving focus.</p>
+                    <div class="visualization-container mb-3">
+                        <div class="voice-waves deep-relaxation-waves">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="audio-player-container mt-3">
+                        <audio class="meditation-audio w-100" controls>
+                            <source src="{{ url_for('static', filename='audio/5minmeditation.mp3') }}" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                    <div class="meditation-info mt-3">
+                        <span class="badge bg-info">5 Minutes</span>
+                        <span class="badge bg-secondary">Intermediate</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Base card styles */
+.meditation-card {
+    background: linear-gradient(145deg, rgba(33, 37, 41, 0.95), rgba(33, 37, 41, 0.85));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Ambient light effects */
+.ambient-light {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+        circle at 50% 50%,
+        rgba(74, 144, 226, 0.2) 0%,
+        rgba(74, 144, 226, 0.1) 25%,
+        transparent 70%
+    );
+    opacity: 0.3;
+    transition: opacity 0.5s ease;
+    z-index: 0;
+    pointer-events: none;
+    animation: pulseLight 4s ease-in-out infinite;
+}
+
+/* Quick Reset - Energetic waves */
+.quick-reset-waves span {
+    background: rgba(255, 147, 85, 0.5); /* Orange tint */
+    animation-duration: 0.5s !important;
+}
+
+.meditation-card[data-meditation-type="quick-reset"] .ambient-light {
+    background: radial-gradient(
+        circle at 50% 50%,
+        rgba(255, 147, 85, 0.2) 0%,
+        rgba(255, 147, 85, 0.1) 25%,
+        transparent 70%
+    );
+}
+
+/* Quick Calm - Balanced waves */
+.quick-calm-waves span {
+    background: rgba(74, 144, 226, 0.5); /* Blue tint */
+    animation-duration: 1s !important;
+}
+
+.meditation-card[data-meditation-type="quick-calm"] .ambient-light {
+    background: radial-gradient(
+        circle at 50% 50%,
+        rgba(74, 144, 226, 0.2) 0%,
+        rgba(74, 144, 226, 0.1) 25%,
+        transparent 70%
+    );
+}
+
+/* Deep Relaxation - Slow waves */
+.deep-relaxation-waves span {
+    background: rgba(147, 85, 255, 0.5); /* Purple tint */
+    animation-duration: 2s !important;
+}
+
+.meditation-card[data-meditation-type="deep-relaxation"] .ambient-light {
+    background: radial-gradient(
+        circle at 50% 50%,
+        rgba(147, 85, 255, 0.2) 0%,
+        rgba(147, 85, 255, 0.1) 25%,
+        transparent 70%
+    );
+}
+
+/* Animation keyframes */
+@keyframes pulseLight {
+    0% { transform: scale(1); opacity: 0.3; }
+    50% { transform: scale(1.2); opacity: 0.5; }
+    100% { transform: scale(1); opacity: 0.3; }
+}
+
+.meditation-card:hover {
+    transform: translateY(-5px);
+}
+
+.meditation-card:hover .ambient-light {
+    opacity: 0.6;
+}
+
+/* Playing state styles */
+.meditation-card.playing {
+    box-shadow: 0 0 30px rgba(74, 144, 226, 0.3);
+}
+
+.meditation-card.playing .ambient-light {
+    opacity: 0.8;
+}
+
+/* Visualization container */
+.visualization-container {
+    height: 120px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Voice waves */
+.voice-waves {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    width: 100px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 10px;
+}
+
+.voice-waves span {
+    width: 4px;
+    height: 100%;
+    margin: 0 2px;
+    border-radius: 2px;
+    transform-origin: bottom;
+}
+
+.meditation-card.playing .voice-waves span {
+    animation: wave 1s ease-in-out infinite;
+}
+
+.meditation-card.playing .voice-waves span:nth-child(1) { animation-delay: 0.1s; }
+.meditation-card.playing .voice-waves span:nth-child(2) { animation-delay: 0.2s; }
+.meditation-card.playing .voice-waves span:nth-child(3) { animation-delay: 0.3s; }
+.meditation-card.playing .voice-waves span:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes wave {
+    0%, 100% { transform: scaleY(0.2); }
+    50% { transform: scaleY(1); }
+}
+
+/* Audio player styles */
+.audio-player-container {
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+audio {
+    filter: invert(1) hue-rotate(180deg);
+}
+
+/* Badge styles */
+.meditation-info {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.badge {
+    padding: 0.5rem 1rem;
+    font-weight: normal;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .meditation-card {
+        margin-bottom: 1.5rem;
+    }
+
+    .ambient-light {
+        opacity: 0.3;
+    }
+
+    .voice-waves {
+        width: 80px;
+    }
+
+    .voice-waves span {
+        width: 3px;
+        margin: 0 1px;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const audioElements = document.querySelectorAll('.meditation-audio');
+    const meditationCards = document.querySelectorAll('.meditation-card');
+
+    audioElements.forEach((audio, index) => {
+        const card = meditationCards[index];
+
+        audio.addEventListener('play', () => {
+            card.classList.add('playing');
+        });
+
+        audio.addEventListener('pause', () => {
+            card.classList.remove('playing');
+        });
+
+        audio.addEventListener('ended', () => {
+            card.classList.remove('playing');
+        });
+    });
+});
+</script>
+{% endblock %}
