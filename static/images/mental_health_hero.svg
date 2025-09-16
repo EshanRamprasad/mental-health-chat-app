@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <style>
+    .primary { fill: #0dcaf0; }
+    .secondary { fill: #6c757d; }
+    .background { fill: #212529; }
+  </style>
+  
+  <!-- Simple abstract representation of mental health support -->
+  <rect class="background" x="0" y="0" width="800" height="600"/>
+  
+  <!-- Circular pattern representing connection and support -->
+  <circle class="primary" cx="400" cy="300" r="150" opacity="0.7"/>
+  <circle class="secondary" cx="400" cy="300" r="120" opacity="0.5"/>
+  <circle class="primary" cx="400" cy="300" r="90" opacity="0.3"/>
+  
+  <!-- Abstract lines representing growth and healing -->
+  <path class="secondary" d="M 250 450 Q 400 200 550 450" fill="none" stroke="#6c757d" stroke-width="3"/>
+  <path class="primary" d="M 200 350 Q 400 100 600 350" fill="none" stroke="#0dcaf0" stroke-width="3"/>
+</svg>
